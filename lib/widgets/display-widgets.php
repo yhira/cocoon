@@ -101,6 +101,7 @@ function display_widgets_in_widget_form( $widget, $return, $instance ){
   <?php
   //ウィジェットIDを取得
   $widget_id = $widget->id;
+  $widget_id = rand();
   //フィールドID
   $field_id = $widget->get_field_id('toggle-link');
   //ウィジェットナンバーを取得
@@ -135,12 +136,12 @@ function display_widgets_in_widget_form( $widget, $return, $instance ){
       ?>
       <style type="text/css">
         /*選択されているタブのコンテンツのみを表示*/
-        #cat-tab-<?php echo $dw->id; ?>:checked ~ .category-check-list,
-        #page-tab-<?php echo $dw->id; ?>:checked ~ .page-display-check-list,
-        #author-tab-<?php echo $dw->id; ?>:checked ~ .author-check-list,
-        #post-tab-<?php echo $dw->id; ?>:checked ~ .post-check-list,
-        #fixed-page-tab-<?php echo $dw->id; ?>:checked ~ .fixed-page-check-list,
-        #tag-tab-<?php echo $dw->id; ?>:checked ~ .tag-check-list {
+        #cat-tab-<?php echo $widget_id; ?>:checked ~ .category-check-list,
+        #page-tab-<?php echo $widget_id; ?>:checked ~ .page-display-check-list,
+        #author-tab-<?php echo $widget_id; ?>:checked ~ .author-check-list,
+        #post-tab-<?php echo $widget_id; ?>:checked ~ .post-check-list,
+        #fixed-page-tab-<?php echo $widget_id; ?>:checked ~ .fixed-page-check-list,
+        #tag-tab-<?php echo $widget_id; ?>:checked ~ .tag-check-list {
           display: block;
         }
       </style>
