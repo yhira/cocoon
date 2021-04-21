@@ -46,12 +46,12 @@ export default function save( props ) {
   const iconListBlockProps = useBlockProps.save({
       className: className,
   });
-  const iconListTitleBlockProps = useBlockProps.save({
-      className: 'iconlist-title',
-  });
+  // const iconListTitleBlockProps = useBlockProps.save({
+  //     className: 'iconlist-title',
+  // });
   return (
     <div { ...iconListBlockProps }>
-      <div { ...iconListTitleBlockProps }>
+      <div className='iconlist-title'>
         <RichText.Content
           value={ title }
         />

@@ -1,0 +1,13 @@
+diff a/blocks/src/blocks.js b/blocks/src/blocks.js	(rejected hunks)
+@@ -13,9 +13,11 @@ const cocoonBlocksPro = [];
+ 
+ //構造化したブロック
+ import * as iconBox from './block/icon-box';
++import * as iconList from './block/icon-list';
+ 
+ const cocoonBlocks = [
+ 	iconBox,
++	iconList,
+ ];
+ 
+ 
