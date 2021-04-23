@@ -9,7 +9,6 @@ import {
   PanelColorSettings,
   withFontSizes,
   useBlockProps,
-  __experimentalUseInnerBlocksProps as useInnerBlocksProps,
 } from '@wordpress/block-editor';
 import {
   PanelBody,
@@ -45,59 +44,41 @@ const FallbackStyles = withFallbackStyles((node, ownProps) => {
   }
 });
 
-export function IconListEdit( props ) {
-  const {
-    attributes,
-    setAttributes,
-    mergeBlocks,
-    onReplace,
-    className,
-    backgroundColor,
-    setBackgroundColor,
-    textColor,
-    setTextColor,
-    borderColor,
-    setBorderColor,
-    iconColor,
-    setIconColor,
-    fallbackBackgroundColor,
-    fallbackTextColor,
-    fallbackBorderColor,
-    fallbackIconColor,
-    fallbackFontSize,
-    fontSize,
-    setFontSize,
-  } = props;
+class CocoonIconListBoxBlock extends Component {
+  constructor() {
+    super(...arguments);
+  }
 
-  const {
-    title,
-    icon,
-  } = attributes;
+  render() {
+    const {
+      attributes,
+      setAttributes,
+      mergeBlocks,
+      onReplace,
+      className,
+      backgroundColor,
+      setBackgroundColor,
+      textColor,
+      setTextColor,
+      borderColor,
+      setBorderColor,
+      iconColor,
+      setIconColor,
+      fallbackBackgroundColor,
+      fallbackTextColor,
+      fallbackBorderColor,
+      fallbackIconColor,
+      fallbackFontSize,
+      fontSize,
+      setFontSize,
+    } = this.props;
 
-  const classes = classnames(className, {
-    'iconlist-box': true,
-    'blank-box': true,
-    [ icon ]: !! icon,
-    'block-box': true,
-    'has-text-color': textColor.color,
-    'has-background': backgroundColor,
-    'has-border-color': borderColor,
-    'has-icon-color': iconColor,
-    [backgroundColor.class]: backgroundColor.class,
-    [textColor.class]: textColor.class,
-    [borderColor.class]: borderColor.class,
-    [iconColor.class]: iconColor.class,
-    [fontSize.class]: fontSize.class,
-  });
+    const {
+      title,
+      icon,
+    } = attributes;
 
-  const blockProps = useBlockProps({ classes });
-  const innerBlockProps = useInnerBlocksProps( blockProps, {
-    template: [ 'core/list' ],
-    templateLock: "all",
-    allowedBlocks: ALLOWED_BLOCKS,
-  });
-
-  return (
+    return (
     <Fragment>
       <InspectorControls>
         <PanelBody title={ __( 'スタイル設定', THEME_NAME ) }>
@@ -147,7 +128,22 @@ export function IconListEdit( props ) {
         />
       </InspectorControls>
 
-      <div { ...blockProps }>
+      <div className={
+        classnames(className, {
+          'iconlist-box': true,
+          'blank-box': true,
+          [ icon ]: !! icon,
+          'block-box': true,
+          'has-text-color': textColor.color,
+          'has-background': backgroundColor.color,
+          'has-border-color': borderColor.color,
+          'has-icon-color': iconColor.color,
+          [backgroundColor.class]: backgroundColor.class,
+          [textColor.class]: textColor.class,
+          [borderColor.class]: borderColor.class,
+          [iconColor.class]: iconColor.class,
+          [fontSize.class]: fontSize.class,
+        })}>
         <div className="iconlist-title">
           <RichText
             value={ title }
@@ -165,10 +161,10 @@ export function IconListEdit( props ) {
       </div>
     </Fragment>
   );
+  }
 }
-
 export default compose([
   withColors('backgroundColor', {textColor: 'color', borderColor: 'border-color', iconColor: 'icon-color'}),
   withFontSizes('fontSize'),
   FallbackStyles,
-])(IconListEdit);
+])(CocoonIconListBoxBlock);
