@@ -4,9 +4,9 @@ import {
   InspectorControls,
   InnerBlocks,
   RichText,
-  // withColors,
+  withColors,
   PanelColorSettings,
-  // withFontSizes,
+  withFontSizes,
   useBlockProps,
   getColorClassName,
   getFontSizeClass,
@@ -15,35 +15,35 @@ import {
   PanelBody,
   BaseControl,
   Button,
-  // withFallbackStyles,
+  withFallbackStyles,
 } from '@wordpress/components';
 import { Component, Fragment } from '@wordpress/element';
-// import { compose } from '@wordpress/compose';
+import { compose } from '@wordpress/compose';
 import classnames from 'classnames';
 import { times } from 'lodash';
 
 const ALLOWED_BLOCKS = [ 'core/list' ];
 
-// const FallbackStyles = withFallbackStyles((node, ownProps) => {
-//   const {
-//     textColor,
-//     backgroundColor,
-//     borderColor,
-//     iconColor,
-//     fontSize,
-//     customFontSize,
-//   } = ownProps.attributes;
-//   const editableNode = node.querySelector('[contenteditable="true"]');
-//   //verify if editableNode is available, before using getComputedStyle.
-//   const computedStyles = editableNode ? getComputedStyle(editableNode) : null;
-//   return {
-//     fallbackBackgroundColor: backgroundColor || !computedStyles ? undefined : computedStyles.backgroundColor,
-//     fallbackTextColor: textColor || !computedStyles ? undefined : computedStyles.color,
-//     fallbackBorderColor: borderColor || !computedStyles ? undefined : computedStyles.color,
-//     fallbackIconColor: iconColor || !computedStyles ? undefined : computedStyles.color,
-//     fallbackFontSize: fontSize || customFontSize || !computedStyles ? undefined : parseInt( computedStyles.fontSize ) || undefined,
-//   }
-// });
+const FallbackStyles = withFallbackStyles((node, ownProps) => {
+  const {
+    textColor,
+    backgroundColor,
+    borderColor,
+    iconColor,
+    fontSize,
+    customFontSize,
+  } = ownProps.attributes;
+  const editableNode = node.querySelector('[contenteditable="true"]');
+  //verify if editableNode is available, before using getComputedStyle.
+  const computedStyles = editableNode ? getComputedStyle(editableNode) : null;
+  return {
+    fallbackBackgroundColor: backgroundColor || !computedStyles ? undefined : computedStyles.backgroundColor,
+    fallbackTextColor: textColor || !computedStyles ? undefined : computedStyles.color,
+    fallbackBorderColor: borderColor || !computedStyles ? undefined : computedStyles.color,
+    fallbackIconColor: iconColor || !computedStyles ? undefined : computedStyles.color,
+    fallbackFontSize: fontSize || customFontSize || !computedStyles ? undefined : parseInt( computedStyles.fontSize ) || undefined,
+  }
+});
 
 // export default compose([
 //   withColors('backgroundColor', {textColor: 'color', borderColor: 'border-color', iconColor: 'icon-color'}),
@@ -53,7 +53,7 @@ const ALLOWED_BLOCKS = [ 'core/list' ];
 
 
 
-export default function edit({
+export function edit({
   attributes,
   setAttributes,
   mergeBlocks,
@@ -173,5 +173,10 @@ export default function edit({
     </div>
   </Fragment>
   );
-}
+};
 
+export default compose([
+  withColors('backgroundColor', {textColor: 'color', borderColor: 'border-color', iconColor: 'icon-color'}),
+  withFontSizes('fontSize'),
+  FallbackStyles,
+])(edit);
